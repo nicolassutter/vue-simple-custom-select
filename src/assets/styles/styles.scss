@@ -1,0 +1,56 @@
+@import './tailwind/_tailwind.scss';
+/**
+ * @name - apply
+ * @parameter - $classes
+ * Description - Allows the use of multiple classes in @apply rule
+ * @example - @include apply("bg-blue-700 hover:bg-blue-600 focus:bg-blue-600");
+ */
+
+@mixin apply($classes) {
+  @apply #{$classes};
+}
+
+.vue-simple-select-container {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  @import './_transitions.scss';
+  @import './tailwind/_base.scss';
+  @include apply('vss-relative vss-text-gray-800 vss-min-w-32');
+
+  .vue-simple-select {
+    &-button {
+      @include apply('vss-p-2 vss-rounded vss-shadow-sm vss-border vss-border-gray-100 vss-w-max vss-flex vss-items-center vss-min-w-full');
+    }
+
+    &-dropdown {
+      @include apply('vss-rounded vss-shadow vss-w-max vss-absolute vss-top-full vss-left-0 vss-py-1 vss-min-w-full');
+    }
+
+    &-option {
+      @include apply('vss-py-2 vss-px-3 hover:vss-bg-gray-100 vss-transition-colors vss-w-full vss-text-left');
+      
+      &.selected {
+        @include apply('vss-bg-blue-100 vss-text-blue-600 vss-font-medium');
+      }
+    }
+
+    &-icon {
+      @include apply('vss-transform vss-transition-transform vss-w-4 vss-h-4 vss-ml-auto');
+
+      &.reverse {
+        @include apply('vss-rotate-180');
+      }
+    }
+
+    &-placeholder {
+      @include apply('vss-text-gray-500');
+    }
+
+    &-selected {
+      @include apply('vss-text-gray-500');
+    }
+
+    &-label {
+      @include apply('vss-font-bold vss-text-gray-600');
+    }
+  }
+}

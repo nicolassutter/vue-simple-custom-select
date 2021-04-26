@@ -57,7 +57,7 @@ const baseConfig = {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
       babelHelpers: 'bundled',
     },
-  },
+  }
 };
 
 // ESM/UMD/IIFE shared settings: externals

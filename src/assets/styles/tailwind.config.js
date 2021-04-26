@@ -3,12 +3,16 @@ module.exports = {
   purge: [
     'src/**/*.vue'
   ],
+  prefix: 'vss-',
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      minWidth: theme => theme('spacing')
+    },
   },
   variants: {
-    extend: {},
+    extend: {
+    },
   },
   plugins: [],
   corePlugins: {

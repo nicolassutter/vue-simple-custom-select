@@ -1,4 +1,5 @@
 export interface Option {
-  value: string | number;
+  uid?: string;
+  value: any;
   label: string;
 }
