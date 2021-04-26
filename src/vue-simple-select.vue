@@ -9,6 +9,8 @@
         :title="title"
         @click="handleClick"
       >
+        <slot name="inner-button"></slot>
+
         <span 
           v-if="placeholder && !selectedOption && (!selectedOptions || !selectedOptions.length)"
           class="vue-simple-select-placeholder"
