@@ -1,6 +1,6 @@
 {
   "name": "vue-simple-custom-select",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A really simple select",
   "main": "dist/vue-simple-select.ssr.js",
   "browser": "dist/vue-simple-select.esm.js",
@@ -26,9 +26,7 @@
     "css": "cd src/assets/styles && npx mix watch",
     "css-prod": "cd src/assets/styles && npx mix --production"
   },
-  "dependencies": {
-    "tailwind-loves-sass": "^1.1.3"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
