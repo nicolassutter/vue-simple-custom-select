@@ -8,7 +8,7 @@ A simple Vue component that allows you to create a custom select without any eff
 npm i vue-simple-custom-select
 ````
 
-You can the use by importing it in your chosen Vue project.
+You can then use it by importing it in your chosen Vue project.
 
 ````vue
 <template>
