@@ -20,7 +20,7 @@
         <slot name="inner-button"></slot>
 
         <span 
-          v-if="placeholder && !selectedOption && (!selectedOptions || !selectedOptions.length)"
+          v-if="placeholder && (!selectedOption || !Object.keys(selectedOption).length) && (!selectedOptions || !selectedOptions.length)"
           class="vue-simple-select-placeholder"
         >
           {{ placeholder }}
