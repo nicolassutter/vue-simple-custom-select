@@ -2,6 +2,7 @@
 
 A simple Vue component that allows you to create a custom select without any efforts.
 
+[Demo available here](https://codepen.io/Sinuto/pen/GRreVxo)
 ## <a id="get-started"></a> Get started
 
 ````sh
