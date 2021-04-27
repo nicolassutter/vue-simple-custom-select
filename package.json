@@ -1,6 +1,6 @@
 {
   "name": "vue-simple-custom-select",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A really simple select",
   "main": "dist/vue-simple-select.ssr.js",
   "browser": "dist/vue-simple-select.esm.js",
