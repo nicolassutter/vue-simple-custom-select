@@ -103,7 +103,7 @@ export default /*#__PURE__*/Vue.extend({
       /**
        * The currently selected option, if not in multiple mode
        */
-      selectedOption: null as null | Option,
+      selectedOption: {} as Option,
       /**
        * The currently selected options, if in multiple mode
        */

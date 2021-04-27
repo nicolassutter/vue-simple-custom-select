@@ -28,7 +28,7 @@ export default {
   },
   data() {
     return {
-      selected: null,
+      selected: {},
       options: [
         {
           label: 'Label',
