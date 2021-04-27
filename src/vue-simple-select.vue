@@ -3,7 +3,7 @@
     class="vue-simple-select-container"
     v-click-outside="handleOutside"
   >
-    <slot name="button" v-bind="{ handleClick }">
+    <slot name="button" v-bind="{ handleClick, showSelect, hideSelect }">
       <button
         class="vue-simple-select-button"
         :title="title"
@@ -34,7 +34,7 @@
 
         <slot name="before-icon"></slot>
 
-        <slot name="icon">
+        <slot name="icon" v-bind="{ show }">
           <icon-chevron 
             class="vue-simple-select-icon" 
             :class="{ reverse: show }"
@@ -44,7 +44,7 @@
         <slot name="after-icon"></slot>
       </button>
     </slot>
-    <transition name="slide-fade">
+    <transition :name="transition">
       <slot
         name="dropdown"
         v-if="show"
@@ -133,6 +133,14 @@ export default /*#__PURE__*/Vue.extend({
     placeholder: {
       type: String,
       default: 'Hello'
+    },
+
+    /**
+     * The name of the transition to use when showing or hiding the dropdowm.
+     */
+    transition: {
+      type: String,
+      default: 'slide-fade'
     },
 
     /**
