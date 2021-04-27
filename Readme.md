@@ -83,15 +83,16 @@ This component's slots give acces to differents methods allowing you to customiz
 |------|--------|---------|-------|-------------|
 | `showSelect` | `void` | `void` | `show` | Is used to show the dropdown |
 | `hideSelect` | `void` | `void` | `hide` | Is used to hide the dropdown |
-| `handleClick` | `void` | `void` | `show | hide` | Is used to toggle between showing and hiding the dropdown
+| `handleClick` | `void` | `void` | `show` | Is used to toggle between showing and hiding the dropdown
 | `selectValue` | `option: Option` | `void` | `change` | Is used to select (or remove) an option, an option has to be passed in |
-| `isSelected` | `option: Option` | `boolean` | `` | Determines if the passed in option is selected |
+| `isSelected` | `option: Option` | `boolean` | `void` | Determines if the passed in option is selected |
 
 ## Styles
 
 The components uses only a few styles that can be easily changed and adapted. You can even add your own classes using slots.
 
 > Every class is nested inside `.vue-simple-select-container`.
+
 > Every class is prefixed by `vue-simple-select-`.
 
 | Name | Description |
