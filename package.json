@@ -1,12 +1,16 @@
 {
   "name": "vue-simple-custom-select",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A really simple select",
   "main": "dist/vue-simple-select.ssr.js",
   "browser": "dist/vue-simple-select.esm.js",
   "module": "dist/vue-simple-select.esm.js",
   "unpkg": "dist/vue-simple-select.min.js",
   "types": "vue-simple-select.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nicolassutter/vue-simple-custom-select.git"
+  },
   "files": [
     "./dist/*",
     "vue-simple-select.d.ts",

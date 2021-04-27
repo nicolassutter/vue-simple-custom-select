@@ -108,3 +108,10 @@ The components uses only a few styles that can be easily changed and adapted. Yo
 | `selected` | Refers to the content of the button if it contains a list of selected options (in multiple mode) |
 | `selected-option` | Refers to the content of the button (in single mode) |
 | `label` | Refers to the amount of selected option (in multiple mode) |
+
+### Side notes
+
+The component is originally made for my personnal use and therefore may contain bugs (that can be reported on the [GitHub repo](https://github.com/nicolassutter/vue-simple-custom-select)).
+
+> Finding documentation on how to use a preprocessor and install TailwindCSS with Vue-Rollup wasn't an easy task. So I decided to use laravel-mix to build a simple css file that is then used in the component. 
+> I am definetly open for suggestions on how to improve this process or any other aspect of the component.
