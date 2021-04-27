@@ -2,12 +2,20 @@
   <div 
     class="vue-simple-select-container"
     v-click-outside="handleOutside"
+    @keyup.down="gotToNextOption"
+    @keyup.up="gotToPreviousOption"
+    @keyup="gotToOption"
   >
     <slot name="button" v-bind="{ handleClick, showSelect, hideSelect }">
       <button
         class="vue-simple-select-button"
         :title="title"
         @click="handleClick"
+        aria-haspopup="listbox"
+        :aria-expanded="show"
+        :aria-owns="`dropdown-${uid}`"
+        :aria-labelledby="labelledby"
+        :aria-activedescendant="activeDescendant"
       >
         <slot name="inner-button"></slot>
 
@@ -50,12 +58,19 @@
         v-if="show"
         v-bind="{ selectValue, isSelected, show }"
       >
-        <div class="vue-simple-select-dropdown">
+        <div
+          class="vue-simple-select-dropdown"
+          :id="`dropdown-${uid}`"
+        >
           <slot
             name="dropdown-content"
             v-bind="{ selectValue, isSelected }"
           >
-            <ul class="vue-simple-select-list">
+            <ul
+              ref="options-list"
+              class="vue-simple-select-list"
+              role="listbox"
+            >
               <li v-for="(option, index) in _options"
                 class="vue-simple-select-list-item"
               >
@@ -67,6 +82,9 @@
                     @click="selectValue(option)"
                     class="vue-simple-select-option"
                     :class="{ selected: isSelected(option) }"
+                    :id="`vue-simple-select-option-${option.uid}`"
+                    :ref="`vue-simple-select-option-${option.uid}`"
+                    role="option"
                   >
                     {{ option.label }}
                   </button>
@@ -96,6 +114,10 @@ export default /*#__PURE__*/Vue.extend({
 
   data() {
     return {
+      /**
+       * Unique component ID
+       */
+      uid: _uid(),
       /**
        * If the dropdown is shown or not
        */
@@ -132,7 +154,7 @@ export default /*#__PURE__*/Vue.extend({
      */
     placeholder: {
       type: String,
-      default: 'Hello'
+      default: ''
     },
 
     /**
@@ -182,6 +204,14 @@ export default /*#__PURE__*/Vue.extend({
     multiple: {
       type: Boolean,
       default: false
+    },
+
+    /**
+     * Can be used to specify what element labels the button
+     */
+    labelledby: {
+      type: String,
+      default: ''
     },
 
     /**
@@ -237,14 +267,126 @@ export default /*#__PURE__*/Vue.extend({
      * Maps unique IDS to each option
      */
     _options(): Option[] {
-      return this.options.map((option: Option) => ({
+      const options = this.options as Option[]
+      return options.map((option: Option) => ({
         uid: _uid(),
         ...option
       }))
+    },
+
+    /**
+     * Returns the active selected option, for accessibility purposes
+     */
+    activeDescendant() {
+      const option = this.selectedOption as Option
+      if (!this.multiple && option && isOption(option)) {
+        return `vue-simple-select-option-${option.uid}`
+      }
+      return null
     }
   },
 
   methods: {
+    /**
+     * Returns an Array of every DOM elements corresponding to an select option
+     */
+    getDOMOptions() {
+      const options = Object
+        .entries(this.$refs)
+        .map(([key, value]) => {
+          return key.includes('vue-simple-select-option') ? value : null
+        })
+        .filter(value => value)
+        .flat() as HTMLElement[]
+      return options
+    },
+
+    /**
+     * Handles navigating with Home and End keys
+     */
+    gotToOption(event: KeyboardEvent) {
+      const options = this.getDOMOptions()
+      if (options && options.length) {
+        const lastIndex = options.length - 1
+        if (event.code === 'End') {
+          options && options.length && options[lastIndex] && options[lastIndex].focus()
+        } else if (event.code === 'Home') {
+          options && options.length && options[0].focus()
+        }
+      }
+    },
+
+    /**
+     * Handles navigating Arrow Down
+     */
+    gotToNextOption(_: KeyboardEvent) {
+      /**
+       * Every Options
+       */
+      const options = this.getDOMOptions()
+      if (options && options.length) {
+        /**
+         * Currently focused element
+         */
+        const currentElement = document.activeElement
+        const isCurrentElementOption = currentElement && currentElement.id.includes('vue-simple-select-option')
+        /**
+         * If it is an option
+         */
+        if (isCurrentElementOption) {
+          /**
+           * Find the next one and focus it
+           */
+          const elementIndex = options.findIndex(element => element.id === (currentElement && currentElement.id))
+          if (elementIndex > -1) {
+            const nextElementIndex = elementIndex + 1
+            const nextElement = options[nextElementIndex]
+            if (nextElement) {
+              nextElement.focus()
+            }
+          }
+        } else {
+          /**
+           * Focus the first one
+           */
+          options && options[0] && options[0].focus()
+        }
+      }
+    },
+
+    /**
+     * Handles navigating Arrow Up
+     */
+    gotToPreviousOption(_: KeyboardEvent) {
+      /**
+       * Currently focused element
+       */
+      const options = this.getDOMOptions()
+      if (options && options.length) {
+        /**
+         * Currently focused element
+         */
+        const currentElement = document.activeElement
+        const isCurrentElementOption = currentElement && currentElement.id.includes('vue-simple-select-option')
+        /**
+         * If it is an option
+         */
+        if (isCurrentElementOption) {
+          /**
+           * Find the previous one and focus it
+           */
+          const elementIndex = options.findIndex(element => element.id === (currentElement && currentElement.id))
+          if (elementIndex > -1) {
+            const previousElementIndex = elementIndex - 1
+            const previousElement = options[previousElementIndex]
+            if (previousElement) {
+              previousElement.focus()
+            }
+          }
+        }
+      }
+    },
+
     /**
      * Handles the clicking outside
      */

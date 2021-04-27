@@ -53,6 +53,7 @@ export default {
 | `placeholder` | `''` | The value to be displayed when nothing is selected | `false` |
 | `title` | `''` | Ability to place a title on the select button | `false` |
 | `transition` | `'slide-fade'` | Used to change the transition when showing or hiding the dropdowm. | `false` |
+| `labelledby` | `''` | Can be used to specify what element labels the button. | `false` |
 
 ## V-model
 
