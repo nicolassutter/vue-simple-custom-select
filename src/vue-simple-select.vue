@@ -72,6 +72,7 @@
               role="listbox"
             >
               <li v-for="(option, index) in _options"
+                :key="`option-${index}`"
                 class="vue-simple-select-list-item"
               >
                 <slot
